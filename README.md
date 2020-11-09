@@ -24,6 +24,24 @@ this will generate huge string that you can put in your access token. Generate a
 You will need to login to your mongodDB atlas account and the get the username and password of the database cluster you want to access.
 See Node.js Crash Course Tutorial #9-MongoDB resource below
 
+### How this project is broken down
+So basically there are two Servers. There's an authServer.js and app.js . (I'm thinking i might change app.js to appServer.js but w/e. That's what it is right now).
+
+#### 1) AuthSever (authServer.js)
+* handles SignIn and validates that user exists in mongoDB
+* handles SignUp and creates new users in mongoDB assuming unique username and password.
+* handles the creation JWT.
+
+#### 2) AppServer (app.js)
+* handles all api calls where user has to already be authenticated
+* checks that user has correct access token before executing main api functionality.
+
+### How to start the servers
+In order to start these severs, you're going to have to run two commands
+> npm run devStart
+
+> npm run devStart
+
 ## Helpful Resources I used
 * [What Is JWT and Why Should You Use JWT](https://www.youtube.com/watch?v=7Q17ubqLfaM)
 * [JWT Authentication Tutorial - Node.js](https://www.youtube.com/watch?v=mbsmsi7l3r4)
