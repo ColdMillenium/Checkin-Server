@@ -22,8 +22,10 @@ this will generate huge string that you can put in your access token. Generate a
 
 ### Database Username and Password fields:
 You will need to login to your mongodDB atlas account and the get the username and password of the database cluster you want to access.
+See Node.js Crash Course Tutorial #9-MongoDB resource below
 
 ## Helpful Resources I used
 * [What Is JWT and Why Should You Use JWT](https://www.youtube.com/watch?v=7Q17ubqLfaM)
 * [JWT Authentication Tutorial - Node.js](https://www.youtube.com/watch?v=mbsmsi7l3r4)
-
+* [Node.js Crash Course Tutorial #9-MongoDB](https://www.youtube.com/watch?v=bxsemcrY4gQ)
+   * I used this video specifically but im pretty sure this whole series is useful
