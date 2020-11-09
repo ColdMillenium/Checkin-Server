@@ -1,0 +1,81 @@
+
+
+###
+
+POST http://localhost:4000/token
+Content-Type: application/json
+
+{
+    "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmltIiwiaWF0IjoxNjA0NzY5MzY3fQ.MndmmSBYdG3GC-_JyqQMOkc-cMqnFhWS0zPhUuU7NJk"
+}
+
+###
+POST http://localhost:4000/login
+Content-Type: application/json
+
+{
+    "username": "Jimbot",
+    "password": "password"
+}
+
+### 
+
+DELETE http://localhost:4000/logout
+Content-Type: application/json
+
+{
+    "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmltIiwiaWF0IjoxNjA0NzY5MzY3fQ.MndmmSBYdG3GC-_JyqQMOkc-cMqnFhWS0zPhUuU7NJk"
+}
+
+###
+
+GET http://localhost:8000/userExists
+Content-Type: application/json
+
+{
+    "username": "Andrew"
+}
+
+###
+
+GET http://localhost:8000/emailExists
+Content-Type: application/json
+
+{
+    "email": "bestemail@boop.com"
+}
+
+###
+POST http://localhost:4000/register
+Content-Type: application/json
+
+{
+    "username": "T" ,
+    "email": "averynewemail@sfasdf.com",
+    "password": "P" 
+}
+
+###
+
+POST http://localhost:4000/login
+Content-Type: application/json
+
+{
+    "username": "T" ,
+    "password": "P" 
+}
+
+###
+
+GET http://localhost:8000/myTodos
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiVCIsImlhdCI6MTYwNDkwMjA4NiwiZXhwIjoxNjA0OTA1Njg2fQ.8VkmsK1ZLXOs_BdYBqwS_StYYQqiRle0kjREIi3ApIo
+
+###
+
+POST http://localhost:8000/createTodo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiVCIsImlhdCI6MTYwNDkwMjA4NiwiZXhwIjoxNjA0OTA1Njg2fQ.8VkmsK1ZLXOs_BdYBqwS_StYYQqiRle0kjREIi3ApIo
+Content-Type: application/json
+
+{
+    "name":"for the love of god. do the dishes..." 
+}
