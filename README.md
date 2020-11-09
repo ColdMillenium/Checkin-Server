@@ -1,5 +1,7 @@
 # Checkin-Server
-This repo will contain the necessary api servers for the checkin web app
+This repo will contain the necessary api servers for the checkin web app. This app is using a Node.js & MongoDB backend.
+![Node and Mongo](https://www.nodejsera.com/library/assets/img/node-mongo.png)
+
 
 ## Getting Started
 Before using this repo you will need to made a .env file in the root folder.
