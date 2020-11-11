@@ -122,7 +122,7 @@ function findTodo(id){
                 console.log("error in findTodo")
                 reject(err);
             }else{
-                console.log("returning from findTodo");
+                console.log("returning from findTodo()");
                 resolve(result);
             }
         });
@@ -133,7 +133,7 @@ function updateTodo(id, fields){
     return new Promise((resolve, reject) =>{
         Todo.updateOne({_id: id}, fields, (err, result) =>{
             if(err){
-                console.log("error in updateTodo");
+                console.log("error in updateTodo()");
                 reject(err);
             }else{
                 resolve(result);
@@ -206,7 +206,61 @@ app.post('/updateTodo', authenticateToken, (req,res)=>{
     })
 })
 
+function deleteTodo(id){
+    return new Promise((resolve, reject) =>{
+        Todo.updateOne({_id: id}, (err, result) =>{
+            if(err){
+                console.log("error in deleteTodo()");
+                reject(err);
+            }else{
+                resolve(result);
+            }
+        });
+    }); 
+}
+app.post('/deleteTodo', authenticateToken, (req, res)=>{
+    const username = req.user.user;
+    console.log(username);
+    console.log("updateTodo Request body:");
+    console.log(req.body);
 
+    //Check for required data in body
+    if(!req.body){
+        res.sendStatus(400);
+        return;
+    }
+    if(req.body._id === null){
+        res.json({
+            status: "fail",
+            error: {name: "_ID "}
+        })
+        return;
+    }
+    const id = req.body._id;
+    findTodo(id).then((result)=>{
+        if(result){
+            return deleteTodo(id);
+        }else{
+            throw {_id: "THIS TODO ID DOESN'T EXIST!"}
+        }
+    })
+    .then((result)=>{
+        console.log(result);
+        res.json({
+            status: "success",
+            data: {}
+        })
+    })
+    .catch((error)=>{
+        console.log("ERROR:" + error);
+        res.json({
+            status: "fail",
+            error
+        })
+    })
+
+
+});
 
 
 
