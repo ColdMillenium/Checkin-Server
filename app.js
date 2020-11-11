@@ -239,7 +239,12 @@ app.post('/deleteTodo', authenticateToken, (req, res)=>{
     const id = req.body._id;
     findTodo(id).then((result)=>{
         if(result){
-            return deleteTodo(id);
+            if(result.createBy === username){
+                return deleteTodo(id);
+            }else{
+                throw {username:"TODO DOESN'T BELONG TO " + username}
+            }
+           
         }else{
             throw {_id: "THIS TODO ID DOESN'T EXIST!"}
         }
