@@ -79,3 +79,14 @@ Content-Type: application/json
 {
     "name":"for the love of god. do the dishes..." 
 }
+
+###
+
+POST http://localhost:8000/updateTodo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiVCIsImlhdCI6MTYwNTA2NDgwNywiZXhwIjoxNjA1MDY4NDA3fQ.9v47cG5dd59gucdCUfaV-ETCqF5VYkocy_qPviJR8cI
+Content-Type: application/json
+
+{
+    "_id": "5fa8ffbc0c20795310f832d3",
+    "name":"Even newer, Even Better, Name!" 
+}

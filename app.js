@@ -89,6 +89,7 @@ app.post('/createTodo', authenticateToken, (req,res) =>{
         })
         return;
     }
+    
     //create todo properties
     const properties = {
         name: req.body.name, 
@@ -113,6 +114,96 @@ app.post('/createTodo', authenticateToken, (req,res) =>{
         })
     
 
+})
+function findTodo(id){
+    return new Promise((resolve, reject) =>{
+        Todo.findOne({_id: id}, (err, result) =>{
+            if(err){
+                console.log("error in findTodo")
+                reject(err);
+            }else{
+                console.log("returning from findTodo");
+                resolve(result);
+            }
+        });
+    }); 
+}
+
+function updateTodo(id, fields){
+    return new Promise((resolve, reject) =>{
+        Todo.updateOne({_id: id}, fields, (err, result) =>{
+            if(err){
+                console.log("error in updateTodo");
+                reject(err);
+            }else{
+                resolve(result);
+            }
+        });
+    }); 
+}
+app.post('/updateTodo', authenticateToken, (req,res)=>{
+    const username = req.user.user;
+    console.log(username);
+    console.log("updateTodo Request body:");
+    console.log(req.body);
+
+    //Check for required data in body
+    if(!req.body){
+        res.sendStatus(400);
+        return;
+    }
+    if(! '_id' in req.body){
+        res.json({
+            status: "fail",
+            error: {name: "_ID "}
+        })
+        return;
+    }
+    const id = req.body._id;
+    //create todo properties
+    const fields = {}
+    if('name' in req.body && req.body.name!=null){
+        fields.name = req.body.name;
+    }
+    if('completed' in req.body && req.body.completed!=null){
+        fields.completed = req.body.completed;
+    }
+
+    findTodo(id)
+    .then((result)=>{
+        console.log(result);
+        if(result){
+            if(result.createdBy != username){
+                throw {username: "TODO DOESN'T BELONG TO " + username}
+            }else{
+                console.log("attempting to update");
+                return(updateTodo(id, fields));
+            }
+        }else{
+            throw { _id: "THIS TODO ID DOESN'T EXIST!"}
+        }
+    })
+    .then((result)=>{
+        const nModified = result.nModified
+        console.log("documents modified: 1");
+        if(nModified === 1){
+            res.json({
+                status: "success",
+                data: {
+                    nModified: nModified
+                }
+            })
+        }else{
+            throw {nModified: nModified}
+        }
+    })
+    .catch((error)=>{
+        console.log("ERROR:" + error);
+        res.json({
+            status: "fail",
+            error
+        })
+    })
 })
 
 
