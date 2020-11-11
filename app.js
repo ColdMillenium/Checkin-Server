@@ -208,7 +208,7 @@ app.post('/updateTodo', authenticateToken, (req,res)=>{
 
 function deleteTodo(id){
     return new Promise((resolve, reject) =>{
-        Todo.updateOne({_id: id}, (err, result) =>{
+        Todo.deleteOne({_id: id}, (err, result) =>{
             if(err){
                 console.log("error in deleteTodo()");
                 reject(err);
@@ -221,7 +221,7 @@ function deleteTodo(id){
 app.post('/deleteTodo', authenticateToken, (req, res)=>{
     const username = req.user.user;
     console.log(username);
-    console.log("updateTodo Request body:");
+    console.log("deleteTodo Request body:");
     console.log(req.body);
 
     //Check for required data in body
@@ -238,8 +238,9 @@ app.post('/deleteTodo', authenticateToken, (req, res)=>{
     }
     const id = req.body._id;
     findTodo(id).then((result)=>{
+        console.log("bitchin");
         if(result){
-            if(result.createBy === username){
+            if(result.createdBy === username){
                 return deleteTodo(id);
             }else{
                 throw {username:"TODO DOESN'T BELONG TO " + username}
