@@ -97,5 +97,5 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiVCIsImlhd
 Content-Type: application/json
 
 {
-    "_id": "5fa8ffbc0c20795310f832d3",
+    "_id": "5fa8ffbc0c20795310f832d3"
 }
