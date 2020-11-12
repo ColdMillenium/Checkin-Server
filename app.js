@@ -254,7 +254,7 @@ app.post('/deleteTodo', authenticateToken, (req, res)=>{
         console.log(result);
         res.json({
             status: "success",
-            data: {}
+            data: {deletedCount: result.deleteCount}
         })
     })
     .catch((error)=>{
