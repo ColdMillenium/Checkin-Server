@@ -7,7 +7,7 @@ const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
-
+// test
 //makes it so our application can handle json's being sent from the client
 app.use(express.json());
 app.use(cors());
